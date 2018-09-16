@@ -7,6 +7,12 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  resources :articles do
+    member do
+      post :toggle_publish_status
+    end
+  end
+
   get 'article/:id', to: 'articles#show', as: 'article_show'
 
   root to: 'pages#home'
