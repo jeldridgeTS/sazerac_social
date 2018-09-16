@@ -3,6 +3,6 @@ class Article < ApplicationRecord
   friendly_id :title, use: :slugged
 
   enum status: { draft: 0, published: 1 }
-
+  validates_presence_of :title, :body, :thumb_image
   has_many :comments, dependent: :destroy
 end
