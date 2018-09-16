@@ -1,5 +1,15 @@
 <p id="notice"><%= notice %></p>
 
+<% if @article.published? %>
+  <%= link_to @article.status, toggle_publish_status_article_path(@article), method: :post %>
+  <div>Article is live!</div>
+<% elsif @article.draft? %>
+  <%= link_to @article.status, toggle_publish_status_article_path(@article), method: :post %>
+  <div>Article is in draft mode.</div>
+<% end %>
+
+<hr>
+
 <p>
   <strong>Title:</strong>
   <%= @article.title %>

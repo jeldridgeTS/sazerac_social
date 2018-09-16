@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_article, only: [:show, :edit, :update, :destroy, :toggle_publish_status]
 
   # GET /articles
   # GET /articles.json
@@ -59,6 +59,16 @@ class ArticlesController < ApplicationController
       format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def toggle_publish_status
+    if @article.published?
+      @article.draft!
+    elsif @article.draft?
+      @article.published!
+    end
+
+    redirect_to article_show_path(@article)
   end
 
   private
