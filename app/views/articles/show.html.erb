@@ -20,6 +20,13 @@
 </p>
 
 <p>
+  <strong>Tags:</strong>
+  <%= raw tag_links(@article.all_tags) %>
+</p>
+
+<hr>
+
+<p>
   <strong>Body:</strong>
   <%= @article.body %>
 </p>
