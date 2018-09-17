@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'articles/tags/:tag', to: 'articles#index', as: 'article_tag'
   get 'article/:id', to: 'articles#show', as: 'article_show'
 
   root to: 'pages#home'
