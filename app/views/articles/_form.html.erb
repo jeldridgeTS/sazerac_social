@@ -22,8 +22,18 @@
   </div>
 
   <div class="field">
+    <%= form.label :main_image %>
+    <%= form.text_area :main_image %>
+  </div>
+
+  <div class="field">
     <%= form.label :body %>
     <%= form.text_area :body %>
+  </div>
+
+  <div class="field">
+    <%= form.label :all_tags %>
+    <%= form.text_field :all_tags, placeholder: "Tags separated by commas" %>
   </div>
 
   <div class="actions">
