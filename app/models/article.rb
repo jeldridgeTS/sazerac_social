@@ -1,4 +1,5 @@
 class Article < ApplicationRecord
+  include Placeholder
   extend FriendlyId
   friendly_id :title, use: :slugged
 
@@ -20,7 +21,18 @@ class Article < ApplicationRecord
     self.tags.map(&:name).join(", ")
   end
 
+  # ======================= #
+  #         QUERIES         #
+  # ======================= #
+
   def self.tagged_with(name)
     Tag.find_by_name!(name).articles
+  end
+
+  after_initialize :set_defaults
+
+  def set_defaults
+    self.thumb_image ||= Placeholder.image_generator(width: 350, height: 150)
+    self.main_image ||= Placeholder.image_generator(width: 1200, height: 300)
   end
 end
