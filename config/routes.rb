@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
+
   get 'about',  to: 'pages#about'
   get 'contact', to: 'pages#contact'
 
@@ -16,5 +18,5 @@ Rails.application.routes.draw do
   get 'articles/tags/:tag', to: 'articles#index', as: 'article_tag'
   get 'article/:id', to: 'articles#show', as: 'article_show'
 
-  root to: 'pages#home'
+  root to: 'articles#index'
 end
