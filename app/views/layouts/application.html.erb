@@ -10,6 +10,17 @@
   </head>
 
   <body>
+    <% if current_user %>
+      <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-primary" %>
+    <% else %>
+      <%= link_to "Register", new_user_registration_path, class: "btn btn-primary" %>
+      <%= link_to "Login", new_user_session_path, class: "btn btn-primary" %>
+    <% end %>
+
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
     <%= yield %>
   </body>
 </html>
