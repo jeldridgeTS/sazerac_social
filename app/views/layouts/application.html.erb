@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    <% if current_user %>
+    <% if current_user.is_a? User %>
       <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-primary" %>
     <% else %>
       <%= link_to "Register", new_user_registration_path, class: "btn btn-primary" %>
@@ -20,6 +20,8 @@
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+
+    Source: <%= session[:visitor_origin] %> User: <%= current_user.display_name %>
 
     <%= yield %>
   </body>

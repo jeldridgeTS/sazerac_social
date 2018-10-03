@@ -1,4 +1,4 @@
-module DeviseWhitelist
+module DeviseWhitelistConcern
   extend ActiveSupport::Concern
 
   included do
