@@ -15,20 +15,6 @@ ActiveRecord::Schema.define(version: 2018_10_01_230929) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "article_categories", force: :cascade do |t|
-    t.string "category_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "article_categorizations", force: :cascade do |t|
-    t.integer "article_id"
-    t.integer "article_category_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["article_id", "article_category_id"], name: "categorizations"
-  end
-
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "body"
