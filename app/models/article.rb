@@ -5,6 +5,8 @@ class Article < ApplicationRecord
 
   enum status: { draft: 0, published: 1 }
 
+  belongs_to :user
+
   has_many :comments, dependent: :destroy
   has_many :taggings
   has_many :tags, through: :taggings
