@@ -31,6 +31,12 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
 
+    puts "====================================================================="
+    puts "====================================================================="
+    puts @user
+    puts "====================================================================="
+    puts "====================================================================="
+
     @user.articles << @article
 
     respond_to do |format|
@@ -90,6 +96,6 @@ class ArticlesController < ApplicationController
     end
 
     def set_user
-      @user = User.find(current_user.id)
+      @user = current_user
     end
 end

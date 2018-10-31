@@ -20,6 +20,11 @@
 </p>
 
 <p>
+  <strong>Written by:</strong>
+  <%= @article.user.display_name %>
+</p>
+
+<p>
   <strong>Tags:</strong>
   <%= raw tag_links(@article.all_tags) %>
 </p>
