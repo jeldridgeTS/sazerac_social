@@ -29,6 +29,11 @@ class ArticlesController < ApplicationController
   # POST /articles
   # POST /articles.json
   def create
+    if @user.is_a? GuestUser
+      redirect_to articles_path, notice: 'Cannot create articles as a guest.'
+      return
+    end
+
     @article = Article.new(article_params)
 
     @user.articles << @article
