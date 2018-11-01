@@ -31,12 +31,6 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
 
-    puts "====================================================================="
-    puts "====================================================================="
-    puts @user
-    puts "====================================================================="
-    puts "====================================================================="
-
     @user.articles << @article
 
     respond_to do |format|
