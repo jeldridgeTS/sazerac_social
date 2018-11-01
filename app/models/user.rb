@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates_presence_of :display_name, :first_name, :last_name
+
+  has_many :articles
 end

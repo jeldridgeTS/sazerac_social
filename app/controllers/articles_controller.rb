@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy, :toggle_publish_status]
+  before_action :set_user, only: [:create]
 
   # GET /articles
   # GET /articles.json
@@ -29,6 +30,14 @@ class ArticlesController < ApplicationController
   # POST /articles.json
   def create
     @article = Article.new(article_params)
+
+    puts "====================================================================="
+    puts "====================================================================="
+    puts @user
+    puts "====================================================================="
+    puts "====================================================================="
+
+    @user.articles << @article
 
     respond_to do |format|
       if @article.save
@@ -84,5 +93,9 @@ class ArticlesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
       params.require(:article).permit(:title, :body, :thumb_image, :main_image, :all_tags)
+    end
+
+    def set_user
+      @user = current_user
     end
 end
