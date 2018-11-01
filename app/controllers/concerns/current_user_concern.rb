@@ -6,6 +6,6 @@ module CurrentUserConcern
   end
 
   def guest_user
-    OpenStruct.new(display_name: 'Guest')
+    GuestUser.new(display_name: 'Guest')
   end
 end
