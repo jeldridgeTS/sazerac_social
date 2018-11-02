@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_31_030211) do
+ActiveRecord::Schema.define(version: 2018_11_02_022240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,15 @@ ActiveRecord::Schema.define(version: 2018_10_31_030211) do
     t.bigint "user_id"
     t.index ["slug"], name: "index_articles_on_slug", unique: true
     t.index ["user_id"], name: "index_articles_on_user_id"
+  end
+
+  create_table "assignments", force: :cascade do |t|
+    t.bigint "role_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_assignments_on_role_id"
+    t.index ["user_id"], name: "index_assignments_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -47,6 +56,13 @@ ActiveRecord::Schema.define(version: 2018_10_31_030211) do
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.uuid "entity_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "taggings", force: :cascade do |t|
