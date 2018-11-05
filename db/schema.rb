@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_02_022240) do
+ActiveRecord::Schema.define(version: 2018_11_05_033350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,15 +27,6 @@ ActiveRecord::Schema.define(version: 2018_11_02_022240) do
     t.bigint "user_id"
     t.index ["slug"], name: "index_articles_on_slug", unique: true
     t.index ["user_id"], name: "index_articles_on_user_id"
-  end
-
-  create_table "assignments", force: :cascade do |t|
-    t.bigint "role_id"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["role_id"], name: "index_assignments_on_role_id"
-    t.index ["user_id"], name: "index_assignments_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -59,10 +50,10 @@ ActiveRecord::Schema.define(version: 2018_11_02_022240) do
   end
 
   create_table "roles", force: :cascade do |t|
-    t.string "name"
-    t.uuid "entity_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_roles_on_user_id"
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -97,6 +88,7 @@ ActiveRecord::Schema.define(version: 2018_11_02_022240) do
 
   add_foreign_key "articles", "users"
   add_foreign_key "comments", "articles"
+  add_foreign_key "roles", "users"
   add_foreign_key "taggings", "articles"
   add_foreign_key "taggings", "tags"
 end
