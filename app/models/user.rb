@@ -7,4 +7,7 @@ class User < ApplicationRecord
   validates_presence_of :display_name, :first_name, :last_name
 
   has_many :articles
+
+  has_many :assignments
+  has_many :roles, through: :assignments
 end
