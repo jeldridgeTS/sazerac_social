@@ -19,3 +19,17 @@ Article.all.each do |article|
 end
 
 puts 'Comments created!'
+
+Role.create(name: 'guest')
+Role.create(name: 'member')
+Role.create(name: 'writer')
+Role.create(name: 'admin')
+
+puts 'Roles created!'
+
+User.create!(display_name: 'admin',
+             first_name: 'admin',
+             last_name: 'admin',
+             email: 'moo1@admin.com',
+             password: 'admin1'
+            ).roles << Role.find_by_name('admin')
