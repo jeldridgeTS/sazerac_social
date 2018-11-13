@@ -29,7 +29,7 @@ class ArticlesController < ApplicationController
   # POST /articles
   # POST /articles.json
   def create
-    if @user.is_a? GuestUser
+    unless @user.has_role?("writer") || @user.has_role?("admin")
       redirect_to articles_path, notice: 'Cannot create articles as a guest.'
       return
     end
