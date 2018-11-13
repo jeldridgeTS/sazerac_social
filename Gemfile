@@ -66,3 +66,4 @@ gem 'devise'
 
 gem 'bootstrap', '~> 4.1.3'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+gem 'pundit', '~> 1.1'
