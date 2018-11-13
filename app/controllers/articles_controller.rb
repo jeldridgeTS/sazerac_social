@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy, :toggle_publish_status]
-  before_action :set_user, only: [:create]
+
+  after_action :verify_authorized, except: [:index, :show]
 
   # GET /articles
   # GET /articles.json
@@ -20,6 +21,8 @@ class ArticlesController < ApplicationController
   # GET /articles/new
   def new
     @article = Article.new
+
+    authorize @article
   end
 
   # GET /articles/1/edit
@@ -29,14 +32,11 @@ class ArticlesController < ApplicationController
   # POST /articles
   # POST /articles.json
   def create
-    unless @user.has_role?("writer") || @user.has_role?("admin")
-      redirect_to articles_path, notice: 'Cannot create articles as a guest.'
-      return
-    end
+    authorize Article
 
     @article = Article.new(article_params)
 
-    @user.articles << @article
+    current_user.articles << @article
 
     respond_to do |format|
       if @article.save
@@ -92,9 +92,5 @@ class ArticlesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
       params.require(:article).permit(:title, :body, :thumb_image, :main_image, :all_tags)
-    end
-
-    def set_user
-      @user = current_user
     end
 end
