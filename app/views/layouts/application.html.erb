@@ -21,8 +21,11 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
+    <p>*************** USER INFO ***************</p>
+    <div><%= current_user.inspect %></div>
+    <div><%= current_user.user_roles %></div>
+    <p>******************************************</p>
     Source: <%= session[:visitor_origin] %> User: <%= current_user.display_name %>
-
     <%= yield %>
   </body>
 </html>
