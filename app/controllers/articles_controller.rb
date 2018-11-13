@@ -20,9 +20,9 @@ class ArticlesController < ApplicationController
 
   # GET /articles/new
   def new
-    @article = Article.new
+    authorize Article
 
-    authorize @article
+    @article = Article.new
   end
 
   # GET /articles/1/edit
@@ -52,6 +52,8 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
+    authorize @article
+
     respond_to do |format|
       if @article.update(article_params)
         format.html { redirect_to article_show_path(@article), notice: 'Article was successfully updated.' }
@@ -66,6 +68,8 @@ class ArticlesController < ApplicationController
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
+    authorize @article
+
     @article.destroy
     respond_to do |format|
       format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
@@ -74,6 +78,8 @@ class ArticlesController < ApplicationController
   end
 
   def toggle_publish_status
+    authorize @article
+    
     if @article.published?
       @article.draft!
     elsif @article.draft?
