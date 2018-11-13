@@ -13,8 +13,12 @@ class User < ApplicationRecord
   after_initialize :set_default_role, :if => :new_record?
 
 	def set_default_role
-    unless self.user_roles.include? "member"
-      self.roles << Role.find_by_name("member")
+    if self.is_a? GuestUser
+      self.roles << Role.find_by_name("guest") unless self.user_roles.include?("guest")
+    else
+      unless self.user_roles.include? "member"
+        self.roles << Role.find_by_name("member")
+      end
     end
 	end
 
