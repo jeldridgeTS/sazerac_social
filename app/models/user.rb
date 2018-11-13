@@ -12,21 +12,25 @@ class User < ApplicationRecord
 
   after_initialize :set_default_role, :if => :new_record?
 
+  USER_ROLES = %w(guest member writer admin).freeze
+
+  USER_ROLES.each do |role|
+    define_method("#{role}?") { has_role?(role) }
+  end
+
 	def set_default_role
-    if self.is_a? GuestUser
-      self.roles << Role.find_by_name("guest") unless self.user_roles.include?("guest")
-    else
-      unless self.user_roles.include? "member"
-        self.roles << Role.find_by_name("member")
-      end
-    end
+    self.is_a?(GuestUser) ? assign_role("guest") : assign_role("member")
 	end
+
+  def assign_role role
+    self.roles << Role.find_by_name("#{role}") unless has_role? role
+  end
 
   def user_roles
     self.roles.map(&:name)
   end
 
   def has_role? role
-    user_roles.include? role
+    user_roles.include? role.to_s
   end
 end
