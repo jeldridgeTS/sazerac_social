@@ -21,4 +21,8 @@ class User < ApplicationRecord
   def user_roles
     self.roles.map(&:name)
   end
+
+  def has_role? role
+    user_roles.include? role
+  end
 end
