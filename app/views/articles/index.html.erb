@@ -17,6 +17,6 @@
 
 <br>
 
-<% if current_user.has_role?("writer") || current_user.has_role?("admin") %>
+<% if policy(Article).new? %>
   <%= link_to 'New Article', new_article_path %>
 <% end %>

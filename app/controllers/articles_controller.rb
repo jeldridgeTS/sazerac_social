@@ -1,15 +1,13 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy, :toggle_publish_status]
-  before_action :set_user, only: [:create]
+
+  after_action :verify_authorized, except: [:index, :show]
 
   # GET /articles
   # GET /articles.json
   def index
-    if params[:tag]
-      @articles = Article.tagged_with(params[:tag])
-    else
-      @articles = Article.all
-    end
+    # TODO: Move this to policy scope eventually
+    @articles = params[:tag] ? Article.tagged_with(params[:tag]).published : Article.published
   end
 
   # GET /articles/1
@@ -19,6 +17,8 @@ class ArticlesController < ApplicationController
 
   # GET /articles/new
   def new
+    authorize Article
+
     @article = Article.new
   end
 
@@ -29,14 +29,11 @@ class ArticlesController < ApplicationController
   # POST /articles
   # POST /articles.json
   def create
-    unless @user.has_role?("writer") || @user.has_role?("admin")
-      redirect_to articles_path, notice: 'Cannot create articles as a guest.'
-      return
-    end
+    authorize Article
 
     @article = Article.new(article_params)
 
-    @user.articles << @article
+    current_user.articles << @article
 
     respond_to do |format|
       if @article.save
@@ -67,6 +64,7 @@ class ArticlesController < ApplicationController
   # DELETE /articles/1.json
   def destroy
     @article.destroy
+
     respond_to do |format|
       format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
       format.json { head :no_content }
@@ -87,14 +85,11 @@ class ArticlesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_article
       @article = Article.friendly.find(params[:id])
+      authorize @article
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
       params.require(:article).permit(:title, :body, :thumb_image, :main_image, :all_tags)
-    end
-
-    def set_user
-      @user = current_user
     end
 end

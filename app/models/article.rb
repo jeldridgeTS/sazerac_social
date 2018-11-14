@@ -13,6 +13,8 @@ class Article < ApplicationRecord
 
   validates_presence_of :title, :body, :thumb_image, :main_image
 
+  scope :published, ->() { where(status: "published") }
+
   def all_tags=(names)
     self.tags = names.split(",").map do |name|
         Tag.where(name: name.strip).first_or_create!
@@ -35,6 +37,6 @@ class Article < ApplicationRecord
 
   def set_defaults
     self.thumb_image ||= Placeholder.image_generator(width: 350, height: 150)
-    self.main_image ||= Placeholder.image_generator(width: 1200, height: 300)
+    self.main_image  ||= Placeholder.image_generator(width: 1200, height: 300)
   end
 end
