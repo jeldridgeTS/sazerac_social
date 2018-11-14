@@ -11,6 +11,10 @@ class ArticlePolicy < ApplicationPolicy
     user.present? && user.eql?(record.user)
   end
 
+  def destroy?
+    user.present? && user.admin?
+  end
+
   def toggle_publish_status?
     update? || user.admin?
   end
