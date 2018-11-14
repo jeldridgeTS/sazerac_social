@@ -6,11 +6,8 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    if params[:tag]
-      @articles = Article.tagged_with(params[:tag])
-    else
-      @articles = Article.all
-    end
+    # TODO: Move this to policy scope eventually
+    @articles = params[:tag] ? Article.tagged_with(params[:tag]).published : Article.published
   end
 
   # GET /articles/1
@@ -67,7 +64,7 @@ class ArticlesController < ApplicationController
   # DELETE /articles/1.json
   def destroy
     @article.destroy
-    
+
     respond_to do |format|
       format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
       format.json { head :no_content }
