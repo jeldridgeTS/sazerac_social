@@ -52,8 +52,6 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
-    authorize @article
-
     respond_to do |format|
       if @article.update(article_params)
         format.html { redirect_to article_show_path(@article), notice: 'Article was successfully updated.' }
@@ -68,9 +66,8 @@ class ArticlesController < ApplicationController
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
-    authorize @article
-
     @article.destroy
+    
     respond_to do |format|
       format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
       format.json { head :no_content }
@@ -78,8 +75,6 @@ class ArticlesController < ApplicationController
   end
 
   def toggle_publish_status
-    authorize @article
-    
     if @article.published?
       @article.draft!
     elsif @article.draft?
@@ -93,6 +88,7 @@ class ArticlesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_article
       @article = Article.friendly.find(params[:id])
+      authorize @article
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
