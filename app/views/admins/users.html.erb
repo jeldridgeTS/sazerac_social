@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Users</h1>
+
+<% @users.each do |user| %>
+  <div class="content">
+    <p><%= user.display_name %></p>
+    <hr>
+  </div>
+<% end %>
