@@ -8,7 +8,7 @@
       <span class="email"><%= user.email %></span>
       <span class="display-name"><%= user.display_name %></span>
       <span class="assigned-roles"><%= user.user_roles %></span>
-      <span class="all-roles"><%= User.all_roles %></span>
+      <span><%= select_tag "city", options_for_select(User.all_roles) %></span>
     </p>
     <hr>
   </div>
