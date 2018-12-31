@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get 'articles/tags/:tag', to: 'articles#index', as: 'article_tag'
   get 'article/:id', to: 'articles#show', as: 'article_show'
 
-  get 'admin/users', to: 'admins#users'
+  get 'admin/users', to: 'admins#list_users'
 
   root to: 'articles#index'
 end
