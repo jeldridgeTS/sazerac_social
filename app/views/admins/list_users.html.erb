@@ -4,7 +4,12 @@
 
 <% @users.each do |user| %>
   <div class="content">
-    <p><%= user.email %></p>
+    <p>
+      <span class="email"><%= user.email %></span>
+      <span class="display-name"><%= user.display_name %></span>
+      <span class="assigned-roles"><%= user.user_roles %></span>
+      <span class="all-roles"><%= User.all_roles %></span>
+    </p>
     <hr>
   </div>
 <% end %>

@@ -33,4 +33,8 @@ class User < ApplicationRecord
   def has_role? role
     user_roles.include? role.to_s
   end
+
+  def self.all_roles
+    USER_ROLES
+  end
 end
