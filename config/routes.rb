@@ -18,7 +18,12 @@ Rails.application.routes.draw do
   get 'articles/tags/:tag', to: 'articles#index', as: 'article_tag'
   get 'article/:id', to: 'articles#show', as: 'article_show'
 
-  get 'admin/users', to: 'admins#list_users'
+  namespace :admin do
+    get 'dashboard', to: 'dashboard#dashboard'
+    get 'users', to: 'users#list_users'
+    patch 'user_add_role', to: 'users#add_role'
+    patch 'user_remove_role', to: 'users#remove_role'
+  end
 
   root to: 'articles#index'
 end
