@@ -1,0 +1,10 @@
+<%= form_with(url: admin_find_user_path, method: :get) do |form| %>
+  <div class="field">
+    <%= form.label :display_name %>
+    <%= form.text_field :display_name, params[:display_name] %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Search" %>
+  </div>
+<% end %>
