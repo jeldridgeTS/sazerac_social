@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>ID:</strong>
+  <%= @user.id %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Display Name:</strong>
+  <%= @user.display_name %>
+</p>
+
+<p>
+  <%= @user.user_roles %>
+</p>
+
+<p>
+  <%= form_for @user, url: admin_user_add_role_path, html: { method: :patch } do |f| %>
+    <%= f.hidden_field :id, :value => @user.id %>
+    <%= f.label :roles %>
+    <%= f.select "roles", options_for_select(User.all_roles) %>
+    <%= f.submit %>
+  <% end %>
+</p>
