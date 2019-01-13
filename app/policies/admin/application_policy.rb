@@ -1,4 +1,4 @@
-class ApplicationPolicy
+class Admin::ApplicationPolicy
   attr_reader :user, :record
 
   def initialize(user, record)
@@ -7,7 +7,7 @@ class ApplicationPolicy
   end
 
   def index?
-    puts 'IN HERE'
+    puts 'OR AM I HERE?'
     false
   end
 
@@ -33,22 +33,5 @@ class ApplicationPolicy
 
   def destroy?
     false
-  end
-
-  def scope
-    Pundit.policy_scope!(user, record.class)
-  end
-
-  class Scope
-    attr_reader :user, :scope
-
-    def initialize(user, scope)
-      @user = user
-      @scope = scope
-    end
-
-    def resolve
-      scope
-    end
   end
 end
