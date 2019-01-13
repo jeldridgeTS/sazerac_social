@@ -1,33 +1,33 @@
 module Admin
-  class UsersController < ApplicationController
+  class UsersController < Admin::ApplicationController
     before_action :set_admin
 
     after_action :verify_authorized
+
+    def index
+      @users = User.all
+    end
 
     def show
       find_by_display_name
     end
 
     def search_users
-      redirect_to admin_user_show_path(params[:display_name])
+      redirect_to admin_user_path(params[:display_name])
     end
 
     # TODO: Maybe move this to model / refactor to use ids as well
     def find_by_display_name
-      @user = User.find_by_display_name(params[:display_name])
-    end
-
-    def list_users
-      @users = User.all
+      @user = User.find_by_id(params[:id])
     end
 
     def add_role
-      @user = User.find_by_id(params[:user][:id])
+      @user = User.find_by_id(params[:id])
       @user.assign_role params[:user][:roles]
 
       respond_to do |format|
         if @user.save
-          format.html { redirect_to admin_user_show_path(@user.display_name), notice: 'User role successfully added.' }
+          format.html { redirect_to admin_user_path(@user.id), notice: 'User role successfully added.' }
           format.json { render :show, status: :updated, location: @user }
         else
           format.html { render :new }

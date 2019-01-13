@@ -8,7 +8,7 @@
       <span class="email"><%= user.email %></span>
       <span class="display-name"><%= user.display_name %></span>
       <span class="assigned-roles"><%= user.user_roles %></span>
-      <%= form_for user, url: admin_user_add_role_path, html: { method: :patch } do |f| %>
+      <%= form_for user, url: add_role_admin_user_path(user.id), html: { method: :patch } do |f| %>
         <%= f.label :roles %>
         <%= f.select "roles", options_for_select(User.all_roles) %>
         <%= f.submit %>
