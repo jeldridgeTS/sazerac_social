@@ -5,11 +5,8 @@ Rails.application.routes.draw do
   get 'about',  to: 'pages#about'
   get 'contact', to: 'pages#contact'
 
-  resources :articles, except: [:show] do
-    resources :comments
-  end
-
   resources :articles do
+    resources :comments, except: [:show]
     member do
       post :toggle_publish_status
     end
