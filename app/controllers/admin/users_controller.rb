@@ -4,21 +4,17 @@ module Admin
 
     after_action :verify_authorized
 
+    # TODO: Get rid of this, use list_users or similar
     def index
-      @users = User.all
+      unless params[:display_name]
+        redirect_to admin_dashboard_path, notice: 'Please enter a user display name.'
+      end
+
+      @users = User.where(:display_name => params[:display_name])
     end
 
     def show
-      find_by_display_name
-    end
-
-    def search_users
-      redirect_to admin_user_path(params[:display_name])
-    end
-
-    # TODO: Maybe move this to model / refactor to use ids as well
-    def find_by_display_name
-      @user = User.find_by_id(params[:id])
+      @user = User.find(params[:id])
     end
 
     def add_role

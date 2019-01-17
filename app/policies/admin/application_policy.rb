@@ -7,7 +7,6 @@ class Admin::ApplicationPolicy
   end
 
   def index?
-    puts 'OR AM I HERE?'
     false
   end
 

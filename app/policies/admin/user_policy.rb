@@ -1,7 +1,6 @@
 class Admin::UserPolicy < Admin::ApplicationPolicy
   def index?
-    puts 'MOOOOO'
-    true
+    dashboard?
   end
 
   def show?

@@ -4,14 +4,14 @@
 
 <!-- User piece of dashboard START -->
 
-<%= form_with(url: admin_user_search_path, method: :get, local: true) do |form| %>
+<%= form_with(url: admin_users_path, method: :get, local: true) do |form| %>
   <div class="field">
     <%= form.label :display_name %>
     <%= form.text_field :display_name %>
   </div>
 
   <div class="actions">
-    <%= form.submit "Search" %>
+    <%= form.submit "Search", name: nil %>
   </div>
 <% end %>
 
