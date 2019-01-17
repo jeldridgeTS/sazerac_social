@@ -23,10 +23,6 @@ Rails.application.routes.draw do
         patch :remove_role
       end
     end
-
-    # get 'users/:display_name', to: 'users#show', as: 'user_show'
-
-    # get 'find_user', to: 'users#find_by_display_name'
   end
 
   root to: 'articles#index'
