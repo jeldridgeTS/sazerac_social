@@ -1,5 +1,5 @@
 module Admin
-  class DashboardController < ApplicationController
+  class DashboardController < Admin::ApplicationController
     before_action :set_admin
 
     after_action :verify_authorized
