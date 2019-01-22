@@ -11,7 +11,7 @@ class Article < ApplicationRecord
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
 
-  validates_presence_of :title, :body, :thumb_image, :main_image
+  validates_presence_of :title, :body, :thumb_image, :main_image, :main_image_title, :main_image_alt_text
 
   scope :published, ->() { where(status: "published") }
 

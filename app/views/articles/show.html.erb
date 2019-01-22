@@ -11,7 +11,7 @@
 <hr>
 
 <div>
-  <%= image_tag @article.main_image %>
+  <%= image_tag @article.main_image, alt: @article.main_image_alt_text, title: @article.main_image_title %>
 </div>
 
 <p>
