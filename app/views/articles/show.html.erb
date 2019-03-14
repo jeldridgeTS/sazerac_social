@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <% if @article.published? %>
   <%= link_to @article.status, toggle_publish_status_article_path(@article), method: :post %>
   <div>Article is live!</div>
