@@ -1,13 +1,11 @@
-<div class="col-4">
-  <div class="card">
-    <%= image_tag article.thumb_image, class: "card-img-top", alt: article.main_image_alt_text, title: article.main_image_title %>
-    <div class="card-body">
-      <h5 class="card-title">
-        <%= link_to article.title, article_show_path(article) %>
-      </h5>
-    </div>
-    <div class="card-footer">
-      <small class="text-muted">Last updated 3 mins ago</small>
-    </div>
+<div class="card moo">
+  <%= image_tag article.thumb_image, class: "card-img-top", alt: article.main_image_alt_text, title: article.main_image_title %>
+  <div class="card-body">
+    <h5 class="card-title">
+      <%= link_to article.title, article_show_path(article) %>
+    </h5>
+  </div>
+  <div class="card-footer">
+    <small class="text-muted">Last updated 3 mins ago</small>
   </div>
 </div>

@@ -17,10 +17,12 @@
 
 body { padding-top: 70px; }
 
-.debug-info {
-  background-color: #bbb;
-}
+.debug-info { background-color: #bbb; }
 
-.bg-nav-purple {
-  background-color: #501378;
+.bg-nav-purple { background-color: #501378; }
+
+.category-news-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-row-gap: 2em;
 }
