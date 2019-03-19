@@ -12,10 +12,13 @@
   <body>
     <%= render "shared/navbar/navbar" %>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% if flash[:notice] %>
+      <div class="alert alert-success overlap"><%= notice %></div>
+    <% end %>
 
-    <%= yield %>
+    <div class="container-fluid no-pad">
+      <%= yield %>
+    </div>
   </body>
 
   <hr>
