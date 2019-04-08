@@ -11,10 +11,7 @@
 
   <body>
     <%= render "shared/navbar/navbar" %>
-
-    <% if flash[:notice] %>
-      <div class="alert alert-success overlap"><%= notice %></div>
-    <% end %>
+    <%= render "flash" %>
 
     <div class="container-fluid no-pad">
       <%= yield %>
@@ -25,3 +22,7 @@
 
   <%= render "shared/debug/debug_info" %>
 </html>
+
+<script type="text/javascript">
+  $('.saz-flash-msg').delay(3000).fadeOut('medium')
+</script>

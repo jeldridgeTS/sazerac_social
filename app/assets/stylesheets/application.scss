@@ -30,6 +30,15 @@ body { padding-top: 70px; }
   flex-flow: column;
 }
 
+.saz-flash-msg {
+  margin-bottom: 0;
+  border-radius: 0;
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 7000;
+}
+
 .moo { margin: inherit; }
 
 .no-pad { padding: 0; }
