@@ -25,5 +25,5 @@ Rails.application.routes.draw do
     end
   end
 
-  root to: 'articles#index'
+  root to: 'pages#landing'
 end

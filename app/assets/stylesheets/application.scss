@@ -23,6 +23,22 @@ body { padding-top: 70px; }
 
 .category-news-wrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-row-gap: 2em;
+  // grid-template-columns: 1fr 1fr 1fr;
+  // grid-row-gap: 2em;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-auto-rows: minmax(50px, auto);
+  flex-flow: column;
 }
+
+.saz-flash-msg {
+  margin-bottom: 0;
+  border-radius: 0;
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 7000;
+}
+
+.moo { margin: inherit; }
+
+.no-pad { padding: 0; }
