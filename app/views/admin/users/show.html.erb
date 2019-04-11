@@ -25,3 +25,12 @@
     <%= f.submit %>
   <% end %>
 </p>
+
+<p>
+  <%= form_for @user, url: remove_role_admin_user_path, html: { method: :patch } do |f| %>
+    <%= f.hidden_field :id, :value => @user.id %>
+    <%= f.label :roles %>
+    <%= f.select "roles", options_for_select(User.all_roles) %>
+    <%= f.submit %>
+  <% end %>
+</p>

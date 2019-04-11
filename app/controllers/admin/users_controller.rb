@@ -10,7 +10,7 @@ module Admin
         redirect_to admin_dashboard_path, notice: 'Please enter a user display name.'
       end
 
-      @users = User.where(:display_name => params[:display_name])
+      @users = User.where(display_name: params[:display_name])
     end
 
     def show
@@ -33,7 +33,18 @@ module Admin
     end
 
     def remove_role
-      @users = User.all
+      @user = User.find_by_id(params[:id])
+      @user.remove_role params[:user][:roles]
+
+      respond_to do |format|
+        if @user.save
+          format.html { redirect_to admin_user_path(@user.id), notice: 'User role successfully removed.' }
+          format.json { render :show, status: :updated, location: @user }
+        else
+          format.html { render :new }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
+      end
     end
 
     private
