@@ -136,6 +136,7 @@ GEM
     pundit (1.1.0)
       activesupport (>= 3.0.0)
     rack (2.0.5)
+    rack-cors (1.0.3)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.0)
@@ -239,6 +240,7 @@ DEPENDENCIES
   pry
   puma (~> 3.11)
   pundit (~> 1.1)
+  rack-cors
   rails (~> 5.2.0)
   sass-rails (~> 5.0)
   selenium-webdriver
@@ -250,7 +252,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 RUBY VERSION
-   ruby 2.4.4p296
+   ruby 2.4.0p0
 
 BUNDLED WITH
-   1.16.6
+   2.0.1
