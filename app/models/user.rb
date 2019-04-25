@@ -26,6 +26,10 @@ class User < ApplicationRecord
     self.roles << Role.find_by_name("#{role}") unless has_role? role
   end
 
+  def remove_role role
+    self.roles.delete(Role.find_by_name("#{role}")) if has_role? role
+  end
+
   def user_roles
     self.roles.map(&:name)
   end

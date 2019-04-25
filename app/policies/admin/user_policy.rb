@@ -1,14 +1,14 @@
 class Admin::UserPolicy < Admin::ApplicationPolicy
+  def dashboard?
+    user.present? && user.admin?
+  end
+
   def index?
     dashboard?
   end
 
   def show?
     dashboard?
-  end
-
-  def dashboard?
-    user.present? && user.admin?
   end
 
   def find_by_display_name?
@@ -20,6 +20,10 @@ class Admin::UserPolicy < Admin::ApplicationPolicy
   end
 
   def add_role?
+    dashboard?
+  end
+
+  def remove_role?
     dashboard?
   end
 
