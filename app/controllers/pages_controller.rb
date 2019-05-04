@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
 
   def landing
-    @articles = Article.all
+    @articles = Article.published
     @users = User.all
   end
 end
