@@ -4,7 +4,16 @@
   <p>*************** USER INFO ***************</p>
   <div><%= current_user.inspect %></div>
   <div><%= current_user.user_roles %></div>
-  <p>******************************************</p>
+  <p>*************** COOKIES *****************</p>
+  <div><%= request.headers["Cookie"] %></div>
+  <p>*************** REQ HEADERS *****************</p>
+  <% request.headers.each do |key, value| %>
+    <div><%= key %></div>
+  <% end %>
+  <p>*************** RES HEADERS *****************</p>
+  <% response.headers.each do |key, value| %>
+    <div><%= key %></div>
+  <% end %>
   <br>
   Source: <%= session[:visitor_origin] %> User: <%= current_user.display_name %>
   <br>
