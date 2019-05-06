@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :jwt_authenticatable, jwt_revocation_strategy: Blacklist
+         :jwt_authenticatable, jwt_revocation_strategy: JwtBlacklist
 
   validates_presence_of :display_name, :first_name, :last_name
 
