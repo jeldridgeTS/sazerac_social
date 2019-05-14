@@ -9,10 +9,16 @@ class Api::V1::SessionsController < ApplicationController
     @user = User.where(email: params[:email]).first
 
     puts "*********************************************************************"
+    puts "USER INFO:"
     puts @user.inspect
     puts "*********************************************************************"
 
     # binding.pry
+
+    puts "*********************************************************************"
+    puts "SECRET:"
+    puts Rails.application.secrets.secret_key_base
+    puts "*********************************************************************"
 
     secret = Rails.application.secrets.secret_key_base
 
