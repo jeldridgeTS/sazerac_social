@@ -20,7 +20,7 @@ class Api::V1::SessionsController < ApplicationController
     puts Rails.application.secrets.secret_key_base
     puts "*********************************************************************"
 
-    secret = Rails.application.secrets.secret_key_base
+    secret = Rails.application.secrets.secret_key_base || ENV['SECRET_KEY_BASE']
 
     if @user&.valid_password? params[:password]
       jwt = JWT.encode(
