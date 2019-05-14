@@ -2,6 +2,13 @@ Rails.application.routes.draw do
 
   devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
 
+  namespace :api do
+    namespace :v1 do
+      resources :users, :only => [:show, :create, :update, :destroy]
+      resources :sessions, :only => [:create, :destroy]
+    end
+  end
+
   get 'about',  to: 'pages#about'
   get 'contact', to: 'pages#contact'
 
