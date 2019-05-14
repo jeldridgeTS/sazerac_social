@@ -9,7 +9,7 @@ class Api::V1::SessionsController < ApplicationController
     @user = User.where(email: params[:email]).first
 
     puts "*********************************************************************"
-    puts @user
+    puts @user.inspect
     puts "*********************************************************************"
 
     # binding.pry
