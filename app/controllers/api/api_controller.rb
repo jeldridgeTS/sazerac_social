@@ -10,7 +10,6 @@ class Api::ApiController < ActionController::Base
     if auth_present?
       user = User.find(auth["user_id"])
       @current_user ||= user if user
-      render json: { data: @current_user }, status: 200
     end
   end
 
