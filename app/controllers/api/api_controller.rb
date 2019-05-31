@@ -1,5 +1,6 @@
-class Api::ApiController < ActionController::API
+class Api::ApiController < ActionController::Base
   before_action :authenticate
+  skip_before_action :verify_authenticity_token
 
   def logged_in?
     !!current_user
@@ -15,17 +16,18 @@ class Api::ApiController < ActionController::API
 
   def authenticate
     unless logged_in?
-      render json: { error: "POOPOO" }, status: 401
+      render json: { error: "WRONG!" }, status: 401
     end
   end
 
   private
 
   def auth
-    Auth::JwtTokenAuth.decode_token(request.authorization)
+    jwt = cookies.signed[:jwt]
+    Auth::JwtTokenAuth.decode_token(jwt)
   end
 
   def auth_present?
-    !!request.authorization
+    !!cookies.signed[:jwt]
   end
 end
