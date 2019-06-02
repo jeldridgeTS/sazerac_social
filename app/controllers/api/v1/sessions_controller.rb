@@ -9,7 +9,6 @@ class Api::V1::SessionsController < Api::ApiController
 
       cookies.signed[:jwt] = {value:  jwt, httponly: true}
 
-      # render json: { token: jwt }
       render :create, status: 200, locals: { token: jwt }
     else
       # respond_to do |format|
