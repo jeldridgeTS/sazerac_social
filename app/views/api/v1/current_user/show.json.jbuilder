@@ -3,4 +3,5 @@ json.current_user do
   json.email_address current_user.email
   json.first_name current_user.first_name
   json.last_name current_user.last_name
+  json.roles current_user.roles, :name
 end
