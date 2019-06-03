@@ -19,6 +19,6 @@ class Api::V1::SessionsController < Api::ApiController
   end
 
   def destroy
-    #code
+    cookies.delete(:jwt)
   end
 end
