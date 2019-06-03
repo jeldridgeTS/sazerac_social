@@ -20,5 +20,7 @@ class Api::V1::SessionsController < Api::ApiController
 
   def destroy
     cookies.delete(:jwt)
+
+    render json: { msg: "Logged out" }
   end
 end
