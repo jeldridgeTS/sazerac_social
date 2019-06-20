@@ -6,7 +6,7 @@ class Api::V1::SessionsController < Api::ApiController
 
     if @user&.valid_password? params[:password]
       jwt = Auth::JwtTokenAuth.issue_token({ user_id: @user.id })
-      
+
       cookies.signed[:jwt] = {value:  jwt, httponly: true}
     else
       # respond_to do |format|
