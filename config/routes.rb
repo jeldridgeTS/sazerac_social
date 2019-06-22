@@ -2,9 +2,14 @@ Rails.application.routes.draw do
 
   devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
 
-  namespace :api do
+  namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
+      devise_for :users,
+        path: '',
+        path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' },
+        controllers: {
+           registrations: 'api/v1/users/registrations',
+       }, skip: [:sessions, :password]
 
       # resources :users, :only => [:show, :create, :update, :destroy]
       resource :sessions, :only => [:create, :destroy]
