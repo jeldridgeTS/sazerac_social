@@ -13,9 +13,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'about',  to: 'pages#about'
-  get 'contact', to: 'pages#contact'
-
   resources :articles, except: [:show] do
     resources :comments, except: [:show]
     member do
@@ -35,6 +32,9 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  get 'about',  to: 'pages#about'
+  get 'contact', to: 'pages#contact'
 
   root to: 'pages#landing'
 end
