@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 
-  devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
-
   namespace :api do
     namespace :v1 do
-      resources :users, :only => [:show, :create, :update, :destroy]
+      devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
+
+      # resources :users, :only => [:show, :create, :update, :destroy]
       resource :sessions, :only => [:create, :destroy]
 
       get 'current_user', to: 'current_user#show', as: 'current_user'
