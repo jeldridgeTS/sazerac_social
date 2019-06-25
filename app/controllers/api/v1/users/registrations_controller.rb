@@ -2,6 +2,7 @@
 
 class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   # Devise code
+  skip_before_action :authenticate
   skip_before_action :verify_authenticity_token
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
@@ -11,15 +12,14 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     build_resource(sign_up_params)
-    puts "===================================================="
-    puts "***** PARAMS"
-    puts params["user"]
-    puts "****************************************************"
-    puts params["registration"]
-    puts "***** PARAMS"
-    puts "===================================================="
+
     resource.save
     if resource.persisted?
+      # Make cookie here for now
+      # TODO: Signin/Login helper here
+      jwt = Auth::JwtTokenAuth.issue_token({ user_id: @user.id })
+      cookies.signed[:jwt] = { value: jwt, httponly: true }
+
       if resource.active_for_authentication?
         render json: resource
       else
