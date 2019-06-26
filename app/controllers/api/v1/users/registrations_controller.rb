@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
-  # Devise code
   skip_before_action :authenticate
-  skip_before_action :verify_authenticity_token
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 
