@@ -1,7 +1,8 @@
 class Api::ApiController < ActionController::Base
   respond_to :json
-  before_action :authenticate
   protect_from_forgery with: :exception
+  before_action :authenticate
+  skip_before_action :verify_authenticity_token
 
   def authenticate
     unless logged_in?
