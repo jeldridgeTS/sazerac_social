@@ -5,7 +5,10 @@ module Auth
     ALGORITHM = 'HS256'
     DEFAULT_EXPIRE_TIME = (Time.now + 2.weeks).to_i
 
+    PAYLOAD_DEFAULTS = { logged_in: true }
+
     def self.issue_token(payload, exp: DEFAULT_EXPIRE_TIME)
+      payload.merge! PAYLOAD_DEFAULTS
       JWT.encode payload, auth_secret, ALGORITHM
     end
 
