@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resource :sessions, :only => [:create, :destroy]
       # resources :users, :only => [:show, :create, :update, :destroy]
-
+      post 'articles', to: 'jank#create'
       get 'current_user', to: 'current_user#show', as: 'current_user'
     end
   end
