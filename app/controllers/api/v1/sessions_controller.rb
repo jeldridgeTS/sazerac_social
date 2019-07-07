@@ -6,7 +6,7 @@ class Api::V1::SessionsController < Api::ApiController
 
     if @user&.valid_password? params[:password]
       # TODO: Signin/Login helper here
-      jwt = Auth::JwtTokenAuth.issue_token({ user_id: @user.id })
+      jwt = Auth::JwtTokenAuth.issue_token({ user_id: @user.id, logged_in: true })
 
       cookies.signed[:jwt] = { value: jwt, httponly: true }
     else
