@@ -5,13 +5,11 @@ class Api::V1::SessionsController < Api::ApiController
     @user = User.where(email: params[:email]).first
 
     if @user&.valid_password? params[:password]
+      # TODO: Signin/Login helper here
       jwt = Auth::JwtTokenAuth.issue_token({ user_id: @user.id })
-      
-      cookies.signed[:jwt] = {value:  jwt, httponly: true}
+
+      cookies.signed[:jwt] = { value: jwt, httponly: true }
     else
-      # respond_to do |format|
-      #   format.json { render plain: { error: 'invalid_credentials' }.to_json, content_type: 'application/json' }
-      # end
       head(:unauthorized)
     end
   end
