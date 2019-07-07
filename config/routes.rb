@@ -13,9 +13,11 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resource :sessions, :only => [:create, :destroy]
-      # resources :users, :only => [:show, :create, :update, :destroy]
-      post 'articles', to: 'jank#create'
+
+      get 'logged_in', to: 'sessions#logged_in'
       get 'current_user', to: 'current_user#show', as: 'current_user'
+
+      post 'articles', to: 'jank#create'
     end
   end
 
