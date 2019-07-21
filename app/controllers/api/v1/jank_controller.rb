@@ -4,9 +4,7 @@ class Api::V1::JankController < Api::ApiController
   before_action :set_article, only: [:show, :edit, :update, :destroy, :toggle_publish_status]
 
   def create
-    # authorize Article
-
-    puts current_user.user_roles
+    authorize Article
 
     @article = Article.new(article_params)
 
