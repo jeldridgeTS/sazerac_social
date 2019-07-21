@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   # devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
 
+  # Scoping here for devise paths
   scope module: :api, path: 'api', defaults: { format: :json } do
     scope module: :v1, path: 'v1' do
       devise_for :users, controllers: {
