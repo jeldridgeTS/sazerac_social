@@ -1,3 +1,5 @@
+json.logged_in true
+
 json.current_user do
   json.display_name current_user.display_name
   json.email_address current_user.email
