@@ -7,7 +7,7 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     # TODO: Move this to policy scope eventually
-    @articles = params[:tag] ? Article.tagged_with(params[:tag]).published : Article.published
+    @articles = params[:tag] ? Article.tagged_with(params[:tag]).published : Article.all#Article.published
   end
 
   # GET /articles/1
