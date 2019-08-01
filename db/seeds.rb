@@ -45,7 +45,7 @@ User.create!(display_name: 'writer',
              last_name: 'writerL',
              email: 'writer@seed.com',
              password: 'writer1'
-           ).roles << Role.find_by_name('writer')
+            ).roles << Role.find_by_name('writer')
 
 puts "*************************************************************************"
 puts "* Writer created! *******************************************************"
