@@ -1,6 +1,4 @@
-class Api::V1::JankController < Api::ApiController
-  skip_before_action :authenticate
-
+class Api::V1::ArticlesController < Api::ApiController
   before_action :set_article, only: [:show, :edit, :update, :destroy, :toggle_publish_status]
 
   def create
