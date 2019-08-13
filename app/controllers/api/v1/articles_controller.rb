@@ -5,6 +5,7 @@ class Api::V1::ArticlesController < Api::ApiController
   # GET /api/v1/articles
   def index
     @articles = params[:tag] ? Article.tagged_with(params[:tag]).published : Article.all#Article.published
+    render json: { articles: @articles }
   end
 
   # POST /api/v1/articles
@@ -20,6 +21,39 @@ class Api::V1::ArticlesController < Api::ApiController
     else
       render json: { status: :unprocessable_entity, locals: { error: @article.errors } }
     end
+  end
+
+  # PATCH/PUT /articles/1
+  def update
+    respond_to do |format|
+      if @article.update(article_params)
+        format.html { redirect_to article_show_path(@article), notice: 'Article was successfully updated.' }
+        format.json { render :show, status: :ok, location: @article }
+      else
+        format.html { render :edit }
+        format.json { render json: @article.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /articles/1
+  def destroy
+    @article.destroy
+
+    respond_to do |format|
+      format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def toggle_publish_status
+    if @article.published?
+      @article.draft!
+    elsif @article.draft?
+      @article.published!
+    end
+
+    redirect_to article_show_path(@article)
   end
 
   private
