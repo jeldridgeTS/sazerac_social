@@ -1,4 +1,6 @@
 class Api::V1::ArticlesController < Api::ApiController
+  skip_before_action :authenticate, only: [:index, :show]
+
   before_action :set_article, only: [:show, :edit, :update, :destroy, :toggle_publish_status]
   after_action :verify_authorized, except: [:index, :show]
 
@@ -23,7 +25,7 @@ class Api::V1::ArticlesController < Api::ApiController
     end
   end
 
-  # PATCH/PUT /articles/1
+  # PATCH/PUT api/v1/articles/1
   def update
     respond_to do |format|
       if @article.update(article_params)
@@ -36,7 +38,7 @@ class Api::V1::ArticlesController < Api::ApiController
     end
   end
 
-  # DELETE /articles/1
+  # DELETE api/v1/articles/1
   def destroy
     @article.destroy
 
