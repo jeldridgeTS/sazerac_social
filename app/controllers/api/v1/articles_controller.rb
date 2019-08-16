@@ -10,6 +10,10 @@ class Api::V1::ArticlesController < Api::ApiController
     render json: { articles: @articles }
   end
 
+  def show
+    render json: { article: @article }
+  end
+
   # POST /api/v1/articles
   def create
     authorize Article
