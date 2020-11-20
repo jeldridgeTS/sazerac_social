@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :assignments
   has_many :roles, through: :assignments
 
+  has_one_attached :avatar
+
   after_initialize :set_default_role, :if => :new_record?
 
   USER_ROLES = %w(guest member writer admin).freeze
