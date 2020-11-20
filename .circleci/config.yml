@@ -1,8 +1,6 @@
 version: 2.1
 orbs:
   ruby: circleci/ruby@0.1.2
-  environment:
-        BUNDLER_VERSION: 2.1.4
 
 jobs:
   build:
@@ -11,6 +9,12 @@ jobs:
     executor: ruby/default
     steps:
       - checkout
+      - run:
+          name: Configure Bundler
+          command: |
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler
       - run:
           name: Which bundler?
           command: bundle -v
