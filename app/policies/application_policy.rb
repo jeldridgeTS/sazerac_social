@@ -7,7 +7,6 @@ class ApplicationPolicy
   end
 
   def index?
-    puts 'IN HERE'
     false
   end
 

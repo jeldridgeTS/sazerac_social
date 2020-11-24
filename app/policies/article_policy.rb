@@ -4,7 +4,7 @@ class ArticlePolicy < ApplicationPolicy
   end
 
   def create?
-    @user.writer? || @user.admin?
+    @user.writer? #|| @user.admin?
   end
 
   def update?

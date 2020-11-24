@@ -173,6 +173,9 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.2.0)
       loofah (~> 2.2, >= 2.2.2)
+    rails_same_site_cookie (0.1.8)
+      rack (>= 1.5)
+      user_agent_parser (~> 2.5)
     railties (5.2.3)
       actionpack (= 5.2.3)
       activesupport (= 5.2.3)
@@ -234,6 +237,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
+    user_agent_parser (2.7.0)
     warden (1.2.8)
       rack (>= 2.0.6)
     warden-jwt_auth (0.3.6)
@@ -281,6 +285,7 @@ DEPENDENCIES
   rack (>= 2.0.6)
   rack-cors
   rails (~> 5.2.0)
+  rails_same_site_cookie
   railties (>= 5.2.2.1)
   sass-rails (~> 5.0)
   selenium-webdriver

@@ -71,3 +71,5 @@ gem 'loofah', '>= 2.2.3'
 gem 'bootstrap', '>= 4.3.1'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'pundit', '~> 1.1'
+
+gem 'rails_same_site_cookie'
