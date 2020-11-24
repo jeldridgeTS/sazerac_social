@@ -82,24 +82,24 @@ class ArticlesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_article
-      @article = Article.friendly.find(params[:id])
-      authorize @article
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_article
+    @article = Article.friendly.find(params[:id])
+    authorize @article
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def article_params
-      params.require(:article).permit(
-        :title,
-        :body,
-        :jumbotron_image,
-        :main_image,
-        :main_image_title,
-        :main_image_alt_text,
-        :thumb_image,
-        images: [],
-        :all_tags
-      )
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def article_params
+    params.require(:article).permit(
+      :title,
+      :body,
+      :jumbotron_image,
+      :main_image,
+      :main_image_title,
+      :main_image_alt_text,
+      :thumb_image,
+      :all_tags,
+      images: []
+    )
+  end
 end
