@@ -1,7 +1,12 @@
 class Api::ApiController < ActionController::Base
+  include Pundit
+
   respond_to :json
+
   before_action :authenticate
   skip_before_action :verify_authenticity_token
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def authenticate
     unless logged_in?
@@ -29,5 +34,9 @@ class Api::ApiController < ActionController::Base
 
   def auth_present?
     !!cookies.signed[:jwt]
+  end
+
+  def user_not_authorized
+    render json: { error: "Unauthorzed" }, status: 401
   end
 end

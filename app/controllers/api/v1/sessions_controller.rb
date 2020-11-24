@@ -14,6 +14,14 @@ class Api::V1::SessionsController < Api::ApiController
     end
   end
 
+  def logged_in
+    if current_user
+      render json: { logged_in: true }
+    else
+      render json: { logged_in: false }
+    end
+  end
+
   def destroy
     cookies.delete(:jwt)
 

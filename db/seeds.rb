@@ -29,13 +29,26 @@ puts "*************************************************************************"
 puts "* Roles created! ********************************************************"
 puts "*************************************************************************"
 
-User.create!(display_name: 'admin',
-             first_name: 'admin',
-             last_name: 'admin',
-             email: 'moo1@admin.com',
-             password: 'admin1'
-            ).roles << Role.find_by_name('admin')
+User.create!(
+  display_name: 'admin',
+  first_name: 'admin',
+  last_name: 'admin',
+  email: 'moo1@admin.com',
+  password: 'admin1'
+).roles << Role.find_by_name('admin')
 
 puts "*************************************************************************"
 puts "* Admin created! ********************************************************"
+puts "*************************************************************************"
+
+User.create!(
+  display_name: 'writer',
+  first_name: 'writerF',
+  last_name: 'writerL',
+  email: 'writer@seed.com',
+  password: 'writer1'
+).roles << Role.find_by_name('writer')
+
+puts "*************************************************************************"
+puts "* Writer created! *******************************************************"
 puts "*************************************************************************"
