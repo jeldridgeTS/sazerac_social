@@ -79,7 +79,7 @@ class Api::V1::ArticlesController < Api::ApiController
       :main_image_alt_text,
       :thumb_image,
       :all_tags,
-      :jumbotron_image
+      jumbotron_image: {}
     )
   end
 end
