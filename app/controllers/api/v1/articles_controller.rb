@@ -18,7 +18,7 @@ class Api::V1::ArticlesController < Api::ApiController
   def create
     authorize Article
 
-    @article = Article.new(article_params)
+    @article = Article.new(article_params_with_upload)
 
     current_user.articles << @article
 
@@ -78,8 +78,20 @@ class Api::V1::ArticlesController < Api::ApiController
       :main_image_title,
       :main_image_alt_text,
       :thumb_image,
+      :all_tags
+    )
+  end
+
+  def article_params_with_upload
+    params.permit(
+      :title,
+      :body,
+      :main_image,
+      :main_image_title,
+      :main_image_alt_text,
+      :thumb_image,
       :all_tags,
-      jumbotron_image: {}
+      :jumbotron_image
     )
   end
 end
