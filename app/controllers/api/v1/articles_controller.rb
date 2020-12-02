@@ -6,7 +6,7 @@ class Api::V1::ArticlesController < Api::ApiController
 
   # GET /api/v1/articles
   def index
-    @articles = params[:tag] ? Article.tagged_with(params[:tag]).published : Article.all#Article.published
+    @articles = params[:tag] ? Article.tagged_with(params[:tag]).published : Article.published
     render json: { articles: @articles }
   end
 
@@ -71,6 +71,15 @@ class Api::V1::ArticlesController < Api::ApiController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def article_params
-    params.require(:article).permit(:title, :body, :thumb_image, :main_image, :all_tags, :main_image_title, :main_image_alt_text)
+    params.require(:article).permit(
+      :title,
+      :body,
+      :main_image,
+      :main_image_title,
+      :main_image_alt_text,
+      :thumb_image,
+      :all_tags,
+      :jumbotron_image
+    )
   end
 end

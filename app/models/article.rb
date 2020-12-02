@@ -12,15 +12,14 @@ class Article < ApplicationRecord
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
   has_one_attached :jumbotron_image
-  has_many_attached :images
 
-  validates_presence_of :title, :body, :thumb_image, :main_image, :main_image_title, :main_image_alt_text
+  validates_presence_of :title, :body, :thumb_image, :main_image, :main_image_title, :main_image_alt_text, :jumbotron_image
 
   scope :published, ->() { where(status: "published") }
 
   def all_tags=(names)
     self.tags = names.split(",").map do |name|
-        Tag.where(name: name.strip).first_or_create!
+      Tag.where(name: name.strip).first_or_create!
     end
   end
 
