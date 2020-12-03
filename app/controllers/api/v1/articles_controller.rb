@@ -23,7 +23,7 @@ class Api::V1::ArticlesController < Api::ApiController
     current_user.articles << @article
 
     if @article.save
-      render json: { created: true, article: @article }
+      render json: { created: true, article: @article, jumbotron_image: @article.get_image_url }
     else
       render json: { status: :unprocessable_entity, locals: { error: @article.errors } }
     end

@@ -1,4 +1,6 @@
 class Article < ApplicationRecord
+  include Rails.application.routes.url_helpers
+
   include Placeholder
   extend FriendlyId
 
@@ -16,6 +18,10 @@ class Article < ApplicationRecord
   validates_presence_of :title, :body, :thumb_image, :main_image, :main_image_title, :main_image_alt_text, :jumbotron_image
 
   scope :published, ->() { where(status: "published") }
+
+  def get_image_url
+    url_for(self.jumbotron_image)
+  end
 
   def all_tags=(names)
     self.tags = names.split(",").map do |name|
