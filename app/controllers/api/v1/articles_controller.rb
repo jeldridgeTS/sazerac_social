@@ -11,7 +11,7 @@ class Api::V1::ArticlesController < Api::ApiController
   end
 
   def show
-    render json: { article: @article }
+    render json: { article: @article, jumbotron_image: @article.get_image_url }
   end
 
   # POST /api/v1/articles
