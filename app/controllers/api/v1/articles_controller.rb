@@ -6,24 +6,24 @@ class Api::V1::ArticlesController < Api::ApiController
 
   # GET /api/v1/articles
   def index
-    @articles = params[:tag] ? Article.tagged_with(params[:tag]).published : Article.all#Article.published
+    @articles = params[:tag] ? Article.tagged_with(params[:tag]).published : Article.published
     render json: { articles: @articles }
   end
 
   def show
-    render json: { article: @article }
+    render json: { article: @article, jumbotron_image: @article.get_image_url }
   end
 
   # POST /api/v1/articles
   def create
     authorize Article
 
-    @article = Article.new(article_params)
+    @article = Article.new(article_params_with_upload)
 
     current_user.articles << @article
 
     if @article.save
-      render json: { created: true, article: @article }
+      render json: { created: true, article: @article, jumbotron_image: @article.get_image_url }
     else
       render json: { status: :unprocessable_entity, locals: { error: @article.errors } }
     end
@@ -71,6 +71,27 @@ class Api::V1::ArticlesController < Api::ApiController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def article_params
-    params.require(:article).permit(:title, :body, :thumb_image, :main_image, :all_tags, :main_image_title, :main_image_alt_text)
+    params.require(:article).permit(
+      :title,
+      :body,
+      :main_image,
+      :main_image_title,
+      :main_image_alt_text,
+      :thumb_image,
+      :all_tags
+    )
+  end
+
+  def article_params_with_upload
+    params.permit(
+      :title,
+      :body,
+      :main_image,
+      :main_image_title,
+      :main_image_alt_text,
+      :thumb_image,
+      :all_tags,
+      :jumbotron_image
+    )
   end
 end

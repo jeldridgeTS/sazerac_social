@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       devise_for :users, controllers: { registrations: 'api/v1/users/registrations' }, skip: [:sessions, :password]
 
       resource :sessions, :only => [:create, :destroy]
+
       get 'logged_in', to: 'sessions#logged_in'
       get 'current_user', to: 'current_user#show', as: 'current_user'
 
@@ -17,7 +18,6 @@ Rails.application.routes.draw do
 
       get 'articles/tags/:tag', to: 'articles#index', as: 'article_tag'
       get 'article/:id', to: 'articles#show', as: 'article_show'
-
     end
   end
 

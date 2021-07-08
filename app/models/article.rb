@@ -1,6 +1,9 @@
 class Article < ApplicationRecord
+  include Rails.application.routes.url_helpers
+
   include Placeholder
   extend FriendlyId
+
   friendly_id :title, use: :slugged
 
   enum status: { draft: 0, published: 1 }
@@ -10,14 +13,19 @@ class Article < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
+  has_one_attached :jumbotron_image
 
-  validates_presence_of :title, :body, :thumb_image, :main_image, :main_image_title, :main_image_alt_text
+  validates_presence_of :title, :body, :thumb_image, :main_image, :main_image_title, :main_image_alt_text, :jumbotron_image
 
   scope :published, ->() { where(status: "published") }
 
+  def get_image_url
+    url_for(self.jumbotron_image)
+  end
+
   def all_tags=(names)
     self.tags = names.split(",").map do |name|
-        Tag.where(name: name.strip).first_or_create!
+      Tag.where(name: name.strip).first_or_create!
     end
   end
 
